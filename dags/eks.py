@@ -36,22 +36,12 @@ def basic_eks_cosmos_task_group() -> None:
         operator_args={
             "do_xcom_push": False,
             "project_dir":"/app",
-            "image": "139260835254.dkr.ecr.us-east-2.amazonaws.com/dbtcicd:1.0",
+            "image": "139260835254.dkr.ecr.us-east-2.amazonaws.com/dbtcicd:1.1",
             "get_logs": True,
             "is_delete_operator_pod": True,
             "name": "mwaa-cosmos-pod-dbt",
             "config_file": "/usr/local/airflow/dags/kubeconfig",
             "in_cluster": False,
-            "vars": '{"my_car": "val1"}',
-            "env_vars": {
-                "TARGT": "dev",
-                "HOST": 'lin-test.139260835254.us-east-2.redshift-serverless.amazonaws.com', 
-                "PORT": '5439',
-                "USER": 'admin',
-                "PASSWORD": '',
-                "DATABASE": 'dev',
-                "SCHEMA": 'public',
-            },
             "image_pull_policy": "Always",
         },
     )
