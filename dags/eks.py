@@ -36,7 +36,7 @@ def basic_eks_cosmos_task_group() -> None:
         operator_args={
             "do_xcom_push": False,
             "project_dir":"/app",
-            "image": "139260835254.dkr.ecr.us-east-2.amazonaws.com/dbtcicd:1.1",
+            "image": "139260835254.dkr.ecr.us-east-2.amazonaws.com/dbtcicd:1.2",
             "get_logs": True,
             "is_delete_operator_pod": True,
             "name": "mwaa-cosmos-pod-dbt",

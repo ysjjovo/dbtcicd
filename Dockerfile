@@ -1,15 +1,16 @@
-FROM python:3.9-slim
-ENV AWS_DEFAULT_REGION "us-east-2"
-RUN apt-get update
+FROM 139260835254.dkr.ecr.us-east-2.amazonaws.com/cosmos-dbt-base:1.0
 
+ENV AWS_DEFAULT_REGION "us-east-2"
+
+# 设置工作目录
 WORKDIR /app
 
-COPY ./requirements.txt /app
-
-RUN pip install -U pip \
-    && pip --no-cache-dir install -r ./requirements.txt
-
-COPY . .
-COPY profiles.yml /root/.dbt/profiles.yml
+# 复制dbt项目文件到容器中
+COPY . /app
 
 RUN dbt deps
+#RUN dbt compile --profiles-dir .
+#RUN dbt build --profiles-dir .
+
+# 运行dbt命令
+#ENTRYPOINT /bin/bash
