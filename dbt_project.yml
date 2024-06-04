@@ -36,7 +36,7 @@ models:
     example:
       +materialized: view
     base_public:
-      materialized: ephemeral
+      materialized: view
       schema: public
     dept_finance:
       materialized: view

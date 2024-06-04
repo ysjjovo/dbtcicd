@@ -3,7 +3,7 @@ dbtcicd:
     dev:
       dbname: dev
       host: lin-test.139260835254.us-east-2.redshift-serverless.amazonaws.com
-      password: Abcd#1234
+      password: 
       port: 5439
       schema: public
       threads: 1
