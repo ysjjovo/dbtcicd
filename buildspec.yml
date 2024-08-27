@@ -1,0 +1,23 @@
+version: 0.2
+phases:
+  install:
+    commands:
+      - echo intall kubectl and logging in to Amazon ECR...
+      - curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+      - aws --version
+      - AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query "Account" --output text)
+      - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://127.0.0.1:2375 --storage-driver=overlay2 &
+      - timeout 15 sh -c "until docker info; do echo .; sleep 1; done"
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      - echo CODEBUILD_BUILD_ARN is $CODEBUILD_BUILD_ARN
+      - APP=$(echo $CODEBUILD_BUILD_ARN | awk -F':' '{print $(NF-1)}' | awk -F'/' '{print $NF}')
+      - REPO_IMAGE=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$APP:$CODEBUILD_BUILD_NUMBER
+      - docker build --tag $REPO_IMAGE .
+  post_build:
+    commands:
+      - docker push $REPO_IMAGE
+      - aws s3 cp --recursive --exclude "kubectl" --exclude ".git/*" --exclude "target/*" . s3://mwaa-dbt-test/dags/dbt/dbtcicd
