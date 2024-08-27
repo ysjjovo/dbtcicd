@@ -1,13 +1,2 @@
-#--constraint "https://vdp-pulbic.s3.eu-central-1.amazonaws.com/constraints-2_7_1_constraints-3_8.txt"
---constraint "http://hw-vdp-em-sit-oss.obs.ap-southeast-3.myhuaweicloud.com/airflow-constraints/constraints-2_7_1_constraints-3_8.txt"
-#--constraint "https://raw.githubusercontent.com/apache/airflow/constraints-2.7.1/constraints-3.8.txt"
-#psycopg2-binary==2.9.4
-#psycopg2==2.9.4
-#huaweicloudsdkcsms==3.1.78
-#pycryptodome==3.10.1
-airflow-dbt-python[postgres]==2.0.1
-astronomer-cosmos[dbt-postgres,kubernetes]==0.7.3
-#astronomer-Cosmos[dbt-Redshift，kubernetes]==0.7.3
-#https://DBTpypi:rukP3G3bYNh8@devops-maven.zeekrlife.com/repository/group-pypi-bigdata-dw/packages/astronomer-cosmos/1.0.9/astronomer_cosmos-1.0.9-py2.py3-none-any.whl#astronomer-cosmos[dbt-postgres,kubernetes]==1.0.9
-apache-airflow-providers-cncf-kubernetes==7.5.0
-
+astronomer-cosmos==1.6.0
+apache-airflow-providers-cncf-kubernetes

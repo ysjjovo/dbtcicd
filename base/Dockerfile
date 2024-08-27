@@ -10,6 +10,3 @@ COPY ./requirements.txt /base
 
 RUN pip install -U pip \
     && pip --no-cache-dir install -r ./requirements.txt
-
-# 运行dbt命令
-#ENTRYPOINT dbt --version
